@@ -2,7 +2,7 @@
 
 namespace RestaurantAPI.Restaurant
 {
-    public class Restaurant
+    public class Restaurante
     {
         public int Id { get; set; }
         public string Name { get; set; }

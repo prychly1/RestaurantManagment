@@ -10,6 +10,6 @@
 
         public string PostalCode { get; set; }
 
-        public virtual Restaurant Restaurant { get; set; }
+        public virtual Restaurante Restaurant { get; set; }
     }
 }

@@ -22,9 +22,9 @@ namespace SomeWarehouse.WarehouseDB
                 .Property(d => d.numberOfShelf)
                 .IsRequired()
                 .HasMaxLength(30);
-                
 
-            
+
+
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

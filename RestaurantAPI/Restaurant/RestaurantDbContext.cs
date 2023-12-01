@@ -5,7 +5,7 @@ namespace RestaurantAPI.Restaurant
     public class RestaurantDbContext : DbContext
     {
         private string _connectionstring = "Server=(localdb)\\mssqllocaldb;Database=RestaurantDbmode;Trusted_Connection=True;";
-        public DbSet<Restaurant> Restaurants { get; set; }
+        public DbSet<Restaurante> Restaurants { get; set; }
 
         public DbSet<Address> Addreses { get; set; }
 
@@ -13,7 +13,7 @@ namespace RestaurantAPI.Restaurant
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Restaurant>()
+            modelBuilder.Entity<Restaurante>()
                 .Property(r => r.Name)
                 .IsRequired()
                 .HasMaxLength(25);

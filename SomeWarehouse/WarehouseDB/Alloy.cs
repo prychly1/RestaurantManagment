@@ -8,6 +8,6 @@
 
         public int numOfDirect {  get; set; }
 
-        //public virtual Shelf Shelf { get; set; }
+        public virtual Shelf Shelf { get; set; }
     }
 }

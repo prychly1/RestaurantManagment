@@ -1,4 +1,7 @@
-﻿namespace SomeWarehouse.WarehouseDB
+﻿using System.Globalization;
+
+namespace SomeWarehouse.WarehouseDB
+
 {
     public class WarehouseFeeder
     {
@@ -30,10 +33,10 @@
             {
                 new Warehouse()
                 {
-                    Name = "silnik",
-                    Description = "3.0 asn- pęknieta miska",
-                    Address = "magazyn przy szkolnej 4",
-                    City = "CZerniejewo",
+                    Name = "engine",
+                    Description = "good",
+                    Address = "storage",
+                    City = "london",
                     Alloy = new List<Alloy>()
                     {
                         new Alloy()

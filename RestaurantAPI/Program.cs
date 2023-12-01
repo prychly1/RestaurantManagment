@@ -7,16 +7,16 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-builder.Services.AddScoped< IweatherForecastService, weatherForecastService >();
-builder.Services.AddTransient<ISelectedAtributesRanking, SelectedAtributesRanking >();
-builder.Services.AddTransient<IWarehouseService, WarehouseService >();
+
+//builder.Services.AddTransient<ISelectedAtributesRanking, SelectedAtributesRanking >();
+//builder.Services.AddTransient<IWarehouseService, WarehouseService >();
 builder.Services.AddDbContext<RestaurantDbContext>();
 builder.Services.AddScoped<RestaurantSeeder>();
 
 
 var app = builder.Build();
 
-app.Services.GetRequiredService<RestaurantSeeder>().Seed();
+app.Services.CreateScope().ServiceProvider.GetRequiredService<RestaurantSeeder>();
 
 
 // Configure the HTTP request pipeline.

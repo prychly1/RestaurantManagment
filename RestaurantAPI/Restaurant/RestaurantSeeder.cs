@@ -21,11 +21,11 @@
             }
         }
 
-        private IEnumerable<Restaurant> GetRestaurants()
+        private IEnumerable<Restaurante> GetRestaurants()
         {
-            var restaurants = new List<Restaurant>()
+            var restaurants = new List<Restaurante>()
             {
-                new Restaurant()
+                new Restaurante()
                 {
                     Name = "Wielkopolska Restauracja",
                     Category = "Fast Food",
