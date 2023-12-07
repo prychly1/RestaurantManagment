@@ -15,6 +15,9 @@ namespace RestaurantAPI.Sellstorm
         public IEnumerable<Warehouse> Get3(int newPrice)
         {
             var rng = new Random();
+
+
+
             return Enumerable.Range(1, 5).Select(index => new Warehouse
             {
                 Id = Guid.NewGuid(),

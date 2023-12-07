@@ -7,34 +7,45 @@ using System.Diagnostics.Contracts;
 using AutoMapper;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
+using SomeWarehouse.Services;
 
 namespace SomeWarehouse.Controllers
 {
     [Route("api/warehouse")]
     public class WarehouseController : ControllerBase
     {
-        private readonly WarehoudeDbContext _dbContext;
-        private readonly IMapper _mapper;
+        private readonly IWarehouseService _warehouseService;
 
-        public WarehouseController(WarehoudeDbContext dbContext, IMapper mapper)
+        public WarehouseController(IWarehouseService warehouseService)
         {
-            _dbContext = dbContext;
-            _mapper = mapper;
+            _warehouseService = warehouseService;
             
         }
-        [HttpPost]
+
+        [HttpDelete("{id}")]
+        public ActionResult Delete([FromRoute] int id) 
+        {
+            var IsDeleted = _warehouseService.Delete(id);
+            
+            if(IsDeleted)
+            {
+                return NoContent();
+            }
+
+            return NotFound();
+
+        }
+
+        [HttpPost("dodaj")] //nie działa, bład 500
         public ActionResult CreateWarehouse([FromBody] CreateWarehouseDto dto)
         {
             if(!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var warehouse = _mapper.Map<Warehouse>(dto);
-            _dbContext.Warehouses.Add(warehouse);
-            _dbContext.SaveChanges();
+            var id = _warehouseService.Create(dto);
 
-            return Created($"/api/warehouse/{warehouse.Id}",null);
-
+            return Created($"/api/warehouse/{id}", null);
         }
 
         [HttpGet("generate")]
@@ -44,34 +55,25 @@ namespace SomeWarehouse.Controllers
             return Ok();
         }
 
-        [HttpGet("getwarehouse")]
+        [HttpGet("getwarehouse")] //działa
         public ActionResult<IEnumerable<WarehouseDto>> GetAll()
         {
-            var warehausone = _dbContext
-                
-                .Warehouses
-                .ToList();
-
-            var warehouseDto = _mapper.Map<WarehouseDto>(warehausone);
+            var warehouse = _warehouseService.GetAll();
 
 
-            return Ok(warehausone);
+            return Ok(warehouse);
         }
 
         [HttpGet("{id}")]
 
         public ActionResult<WarehouseDto> Get([FromRoute] int id)
         {
-            var warehouse = _dbContext
-                
-                
-                .Warehouses
-                .FirstOrDefault(w => w.Id == id);
-            if(warehouse == null)
+            var warehouse = _warehouseService.GetById(id);
+            if(warehouse is null)
             {
                 return NotFound("NIe ma zodnygo detabesa");
             }
-            var warehouseDto = _mapper.Map<WarehouseDto>(warehouse);
+            
             return Ok(warehouse);
         }
     }

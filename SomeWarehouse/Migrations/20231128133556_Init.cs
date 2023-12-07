@@ -72,6 +72,7 @@ namespace SomeWarehouse.Migrations
                         principalTable: "Warehouses",
                         principalColumn: "Id");
                 });
+            //migrationBuilder.InsertData()
 
             migrationBuilder.CreateIndex(
                 name: "IX_Alloys_ShelfId",

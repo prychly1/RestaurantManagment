@@ -4,6 +4,7 @@ using AutoMapper;
 using System.Runtime.CompilerServices;
 using SomeWarehouse.Controllers;
 using System.Reflection;
+using SomeWarehouse.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,8 +15,8 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<IProductAddService, ProductAddService>();
 builder.Services.AddDbContext<WarehoudeDbContext>();
 builder.Services.AddScoped<SomeWarehouse.WarehouseDB.WarehouseFeeder>();
-builder.Services.AddScoped<WarehouseController>();
 builder.Services.AddAutoMapper(Assembly.GetEntryAssembly());
+builder.Services.AddScoped<IWarehouseService, WarehouseService>();
 
 
 var app = builder.Build();
